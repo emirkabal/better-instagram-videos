@@ -1,0 +1,64 @@
+.better-ig-controller .progress-bar-horizontal {
+  width: 100%;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  -webkit-user-drag: unset;
+  user-select: none;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline {
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background: #9a9a9a92;
+  cursor: pointer;
+  position: relative;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .fill {
+  width: 0;
+  height: 4px;
+  border-radius: 10px;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .chunks {
+  width: 0;
+  height: 4px;
+  border-radius: 10px;
+  background: #dbdbdb96;
+  position: absolute;
+  top: 0;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .pointer {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  transform: translate3d(10px, 0, 0);
+  will-change: trasform;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .dragarea {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  transform: translateY(-35%);
+  z-index: 20;
+}
+
+.baseline:hover .pointer {
+  opacity: 1 !important;
+}

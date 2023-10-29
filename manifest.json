@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "better-ig-controls",
+  "version": "1.0.0",
+  "action": {
+    "default_title": "Popup",
+    "default_popup": "index.html",
+    "default_icon": "logo192.png"
+  },
+  "icons": {},
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["images/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.instagram.com/reels/*"],
+      "js": ["content-script/src/main.tsx"],
+      "media": ["public/images/*"]
+    }
+  ]
+}

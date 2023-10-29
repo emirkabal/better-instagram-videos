@@ -1,0 +1,34 @@
+.better-ig-controller {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.better-ig-controller img {
+  border-radius: 4px;
+}
+
+.better-ig-controller button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+*:focus-visible {
+  outline: none !important;
+}
