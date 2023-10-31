@@ -46,7 +46,7 @@
   border-radius: 50%;
   background: #ffffff;
   position: absolute;
-  top: 0;
+  top: -4px;
   right: -3.5px;
   transform: translate3d(0, -10px, 0);
   will-change: trasform;

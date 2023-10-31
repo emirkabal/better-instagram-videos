@@ -1,12 +1,12 @@
 /// <reference types="chrome" />
 
-import "./style.css";
+import "./style.css"
 
 type Props = {
-  children: React.ReactNode;
-  outside?: React.ReactNode;
-  dragging?: boolean;
-};
+  children: React.ReactNode
+  outside?: React.ReactNode
+  dragging?: boolean
+}
 
 export default function Container({ children, outside, dragging }: Props) {
   return (
@@ -26,5 +26,5 @@ export default function Container({ children, outside, dragging }: Props) {
         </div>
       </div>
     </>
-  );
+  )
 }

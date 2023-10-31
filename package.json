@@ -6,22 +6,25 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "web-vitals": "^3.0.3"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "1.0.14",
+    "@crxjs/vite-plugin": "2.0.0-beta.19",
     "@types/chrome": "^0.0.197",
+    "@types/fs-extra": "^11.0.3",
     "@types/node": "^18.8.3",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
     "@vitejs/plugin-react": "^4.1.0",
-    "classnames": "^2.3.2",
-    "typescript": "^4.6.4",
+    "archiver": "^6.0.1",
+    "fs-extra": "^11.1.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
     "vite": "^4.5.0"
   }
 }
