@@ -21,7 +21,9 @@ async function createArchive() {
 
   const entries = await fs.readdir("dist")
   for (const entry of entries) {
-    archive.file(path.join("dist", entry), { name: entry })
+    const stat = await fs.stat(path.join("dist", entry))
+    if (stat.isDirectory()) archive.directory(path.join("dist", entry), entry)
+    else archive.file(path.join("dist", entry), { name: entry })
   }
 
   console.info("Creating archive ", name)
