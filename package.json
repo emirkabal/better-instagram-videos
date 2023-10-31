@@ -2,11 +2,12 @@
   "name": "better-instagram-controls",
   "description": "Easily control the playback and volume of any Instagram videos.",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:chrome": "npm run build && node buildArchives.mjs",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write ."
   },
