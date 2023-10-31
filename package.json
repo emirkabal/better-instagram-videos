@@ -1,7 +1,8 @@
 {
-  "name": "better-ig-reels",
+  "name": "better-instagram-controls",
+  "description": "Easily control the playback and volume of any Instagram videos.",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
