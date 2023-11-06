@@ -4,7 +4,7 @@
 
 Better Instagram Controls is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
 
-## Installation
+## Contrubition
 
 1. **Clone the repository:**
    ```
