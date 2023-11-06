@@ -18,7 +18,7 @@ Better Instagram Controls is a browser extension available on the Chrome Web Sto
 
 3. **Install dependencies:**
    ```
-   npm install
+   npm install -y
    ```
 
 4. **Build the extension for Chrome:**
