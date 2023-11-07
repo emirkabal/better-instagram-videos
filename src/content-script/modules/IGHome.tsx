@@ -5,7 +5,7 @@ export interface IGHomeOptions extends InjectorOptions {
 }
 
 export default class IGHome extends Injector {
-  private INTERVAL_MS = 800
+  private INTERVAL_MS = 100
   private interval: NodeJS.Timeout | number | undefined
 
   constructor(options?: IGHomeOptions) {

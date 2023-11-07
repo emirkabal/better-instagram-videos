@@ -1,5 +1,3 @@
-/// <reference types="chrome" />
-
 import { useEffect, useRef, useState } from "react"
 import "./style.css"
 
@@ -12,11 +10,9 @@ type Props = {
 
 export default function ProgressBarVertical({
   progress = 0,
-  chunksVal = 0,
   onProgress,
   onDragging
 }: Props) {
-  const [chunks, setChunks] = useState(chunksVal)
   const [progressBar, setProgressBar] = useState(progress)
   const [pointerPosition, setPointerPosition] = useState(0)
   const [isDragging, setDragging] = useState(false)
@@ -94,7 +90,10 @@ export default function ProgressBarVertical({
   }, [isDragging])
 
   return (
-    <div className="better-ig-progress-bar-vertical">
+    <div
+      className="better-ig-progress-bar-vertical"
+      style={isDragging ? { opacity: 1 } : undefined}
+    >
       <div className="baseline">
         <div
           ref={dragareaRef}
@@ -110,12 +109,6 @@ export default function ProgressBarVertical({
             height: `${
               progressBar > 98 ? 100 : progressBar < 3.5 ? 0 : progressBar
             }%`
-          }}
-        ></div>
-        <div
-          className="chunks"
-          style={{
-            height: `${chunks}%`
           }}
         ></div>
         <div

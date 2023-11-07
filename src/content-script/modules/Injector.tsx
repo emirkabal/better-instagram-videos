@@ -2,7 +2,7 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import Controller from "../components/Controller"
 
-type Injected = [HTMLVideoElement, HTMLElement][]
+export type Injected = [HTMLVideoElement, HTMLElement][]
 
 export interface InjectorOptions {
   IMPROVE_PERFORMANCE?: boolean
@@ -14,7 +14,7 @@ export default class Injector {
   private IMPROVE_PERFORMANCE = false
   private MIN_REMOVE_COUNT = 4
   private REMOVE_COUNT = 3
-  private injectedList: [HTMLVideoElement, HTMLElement][] = []
+  private injectedList: Injected = []
 
   constructor(options: InjectorOptions | undefined) {
     this.MIN_REMOVE_COUNT = options?.MIN_REMOVE_COUNT || this.MIN_REMOVE_COUNT
@@ -29,7 +29,7 @@ export default class Injector {
    * ```ts
    * const injector = new Injector();
    * injector.beforeInject = () => {
-   * console.log("Injecting...");
+   *  console.log("Injecting...");
    * }
    * injector.inject();
    * ```
@@ -43,7 +43,7 @@ export default class Injector {
    * ```ts
    * const injector = new Injector();
    * injector.injected = () => {
-   * console.log("Injected!");
+   *  console.log("Injected!");
    * }
    * injector.inject();
    * ```
@@ -56,7 +56,7 @@ export default class Injector {
    * ```ts
    * const injector = new Injector();
    * injector.beforeDelete = () => {
-   * console.log("Deleting...");
+   *  console.log("Deleting...");
    * }
    * injector.delete();
    * ```
@@ -82,9 +82,9 @@ export default class Injector {
    * ```ts
    * const injector = new Injector();
    * injector.wayToInject = () => {
-   * const video = document.querySelector("video");
-   * if (!video) return;
-   * this.inject(video as HTMLVideoElement, video.parentElement!);
+   *  const video = document.querySelector("video");
+   *  if (!video) return;
+   *  this.inject(video as HTMLVideoElement, video.parentElement!);
    * }
    * injector.wayToInject();
    * ```
@@ -93,7 +93,7 @@ export default class Injector {
 
   private clear() {
     if (
-      this.injected.length > this.MIN_REMOVE_COUNT &&
+      this.injectedList.length > this.MIN_REMOVE_COUNT &&
       this.IMPROVE_PERFORMANCE
     ) {
       for (let i = 0; i < this.REMOVE_COUNT; i++) {
@@ -137,24 +137,25 @@ export default class Injector {
     video.setAttribute("better-ig-injected", "")
 
     const controller = document.createElement("div")
-    controller?.setAttribute("better-ig-inject", "")
+    controller.setAttribute("better-ig-inject", "")
 
-    video?.parentElement?.style?.setProperty("position", "relative")
-    video?.parentElement?.appendChild(controller)
+    video.parentElement.style.setProperty("position", "relative")
+    video.parentElement.appendChild(controller)
     video.currentTime = 0
     video.volume = 0
 
-    createRoot(controller)?.render(
-      <React.StrictMode>
-        <Controller video={video} />
-      </React.StrictMode>
+    const id = location.pathname.split("/")[2]
+    const params = new URLSearchParams(location.search)
+    const index = params.get("img_index")
+    const igData: any = {}
+    if (id) igData.id = id
+    if (index) igData.index = parseInt(index)
+
+    createRoot(controller).render(
+      <Controller video={video} igData={igData?.id ? igData : undefined} />
     )
 
-    try {
-      this.injectedList.push([video, parent])
-    } catch (error) {
-      console.log(error)
-    }
+    this.injectedList.push([video, parent])
 
     this.injected()
   }

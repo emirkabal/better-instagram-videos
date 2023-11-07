@@ -1,5 +1,3 @@
-/// <reference types="chrome" />
-
 import { useEffect, useRef, useState } from "react"
 import "./style.css"
 

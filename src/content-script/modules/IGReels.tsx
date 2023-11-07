@@ -11,12 +11,14 @@ export default class IGReels extends Injector {
     })
   }
 
-  public injected(): void {
-    // document.querySelectorAll("video").forEach((video) => {
-    //   if (video.getAttribute("better-ig-injected") !== null) return;
-    //   video.volume = 0;
-    //   video.pause();
-    // });
+  public searchVideo(): void {
+    let fallbackInterval = setInterval(() => {
+      const video = document.querySelector("video")
+      if (video?.readyState === 4) {
+        this.inject(video as HTMLVideoElement, video.parentElement!)
+        clearInterval(fallbackInterval)
+      }
+    }, 100)
   }
 
   public wayToInject(): void {
@@ -24,7 +26,12 @@ export default class IGReels extends Injector {
       window.innerWidth / 2,
       window.innerHeight / 2
     )
-    if (elements[5] === undefined || elements[15] === undefined) return
+    if (elements[8]?.querySelector("button")) {
+      elements[8].querySelector("button")?.addEventListener("click", () => {
+        this.searchVideo()
+      })
+    } else if (elements[5] === undefined || elements[15] === undefined) return
+
     this.inject(elements[5] as HTMLVideoElement, elements[15] as HTMLElement)
   }
 }

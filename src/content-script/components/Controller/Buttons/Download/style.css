@@ -1,0 +1,12 @@
+.better-ig-download {
+  color: white;
+  width: 24px;
+  height: auto;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s ease-out;
+}
+
+.better-ig-download:hover {
+  opacity: 1;
+}

@@ -1,0 +1,13 @@
+.better-ig-volume-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 4px 5px;
+  cursor: pointer;
+}
+
+.better-ig-volume-button svg {
+  color: white;
+  width: 18px;
+  height: 18px;
+}
