@@ -6,9 +6,10 @@ Better Instagram Controls is a browser extension available on the Chrome Web Sto
 
 **Features:**
 
-- Playback and volume (memorable) controls for any video (except for stories)
-- Downloadable media (except for home feed)
-- Improved performance on Reels
+- Playback/seek control
+- Volume control (remembered)
+- Downloadable video
+- Supports all videos on the Instagram except stories section
 
 ## Usage
 
@@ -28,31 +29,32 @@ We welcome contributions from the community! If you have ideas for improvements 
 
 1. **Clone the repository:**
 
-   ```
+   ```bash
    git clone https://github.com/emirkabal/better-instagram-controls.git
    ```
 
 2. **Navigate to the project directory:**
 
-   ```
+   ```bash
    cd better-instagram-controls
    ```
 
 3. **Install dependencies:**
 
-   ```
-   pnpm install -y
+   ```bash
+   pnpm install
    ```
 
 4. **Development area**
 
-   ```
+   ```bash
    pnpm run dev
+   # http://localhost:5173/src/controller-demo/index.html
    ```
 
 5. **Build the extension:**
 
-   ```
+   ```bash
    pnpm run build
    ```
 

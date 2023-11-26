@@ -20,37 +20,42 @@ export default function Controller({ video, igData }: Props) {
   const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
 
-  const [storageV, storageM] = [
-    localStorage.getItem("better-instagram-controls-volume"),
-    localStorage.getItem("better-instagram-controls-muted")
-  ]
-  const [volume, setVolume] = useState(storageV ? parseFloat(storageV!) : 0.5)
-  const [muted, setMuted] = useState(storageM ? storageM === "true" : false)
+  const storageV = localStorage.getItem("better-instagram-controls-volume")
+  const volume = useRef(
+    storageV && !isNaN(storageV as any) ? parseFloat(storageV) : 0.5
+  )
+  const muted = useRef(false)
 
-  videoRef.current.addEventListener("timeupdate", () => {
-    setProgress(
-      (videoRef.current.currentTime / videoRef.current.duration) * 100
-    )
-    videoRef.current.muted = muted
-  })
-
-  videoRef.current.addEventListener("play", () => {
-    videoRef.current.volume = volume
-  })
+  const updateMuted = () => {
+    videoRef.current.volume = muted.current ? 0 : volume.current
+  }
 
   useEffect(() => {
-    videoRef.current.volume = volume
+    videoRef.current.addEventListener("timeupdate", () => {
+      setProgress(
+        (videoRef.current.currentTime / videoRef.current.duration) * 100
+      )
+      videoRef.current.muted = false
+      updateMuted()
+    })
+
+    videoRef.current.addEventListener("play", () => {
+      updateMuted()
+    })
+  }, [])
+
+  useEffect(() => {
+    updateMuted()
   }, [volume])
 
   useEffect(() => {
-    localStorage.setItem("better-instagram-controls-muted", muted.toString())
+    updateMuted()
   }, [muted])
 
   useEffect(() => {
     if (dragging) videoRef.current.pause()
     else
       videoRef.current.play().catch(() => {
-        setMuted(true)
         setTimeout(() => {
           videoRef.current.currentTime = 0
           videoRef.current.play()
@@ -60,19 +65,22 @@ export default function Controller({ video, igData }: Props) {
 
   return (
     <>
-      <VolumeButton muted={muted} onChange={(_) => setMuted(_)} />
+      <VolumeButton
+        muted={muted.current}
+        onChange={(_) => (muted.current = _)}
+      />
       <ProgressBarVertical
-        progress={volume * 100}
+        progress={volume.current * 100}
         onProgress={(_) => {
           const progress = _ / 100
           videoRef.current.volume = progress
-          setVolume(progress)
+          volume.current = progress
         }}
         onDragging={(_) => {
           if (!_)
             localStorage.setItem(
               "better-instagram-controls-volume",
-              volume.toString()
+              volume.current.toString()
             )
         }}
       />

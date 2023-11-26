@@ -1,11 +1,8 @@
 import { IGHome, IGReels } from "./modules"
 
 let previousUrl = ""
-
 const home = new IGHome()
-const reels = new IGReels({
-  IMPROVE_PERFORMANCE: true
-})
+const reels = new IGReels()
 
 const fn = () => {
   if (location.pathname === "/") {

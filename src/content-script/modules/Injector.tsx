@@ -1,4 +1,3 @@
-import React from "react"
 import { createRoot } from "react-dom/client"
 import Controller from "../components/Controller"
 
@@ -127,7 +126,7 @@ export default class Injector {
       !video ||
       !video?.parentElement ||
       !video?.src ||
-      video?.getAttribute("better-ig-injected") !== null
+      video?.hasAttribute("better-ig-injected")
     )
       return
 
@@ -161,6 +160,6 @@ export default class Injector {
   }
 
   public isInjected(video: HTMLVideoElement) {
-    return video.getAttribute("better-ig-injected") !== null
+    return video.hasAttribute("better-ig-injected")
   }
 }
