@@ -70,6 +70,10 @@ We welcome contributions from the community! If you have ideas for improvements 
 
 The Better Instagram Controls extension should now be installed in your Chrome browser.
 
+## Legal
+
+Instagram is a registered trademark. This extension was developed independently of Instagram, by someone who is not related or affiliated with Instagram, without any help or endorsement from them.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
