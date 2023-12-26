@@ -1,8 +1,8 @@
-# Better Instagram Controls
+# Better Instagram Videos
 
-<img align="right" src="/public/icons/logo128.png" width=96 alt="Better Instagram Controls logo">
+<img align="right" src="/public/icons/logo128.png" width=96 alt="Better Instagram Videos Logo">
 
-Better Instagram Controls is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
+Better Instagram Videos is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
 
 **Features:**
 
@@ -13,30 +13,30 @@ Better Instagram Controls is a browser extension available on the Chrome Web Sto
 
 ## Usage
 
-After [installation](https://chromewebstore.google.com/detail/better-instagram-controls/aklkofahlebncdnciilboglligohenki), you can use the extension to control video playback and adjust volume on Instagram effortlessly.
+After [installation](https://chromewebstore.google.com/detail/better-instagram-videos/aklkofahlebncdnciilboglligohenki), you can use the extension to control video playback and adjust volume on Instagram effortlessly.
 
-![Screenshot](https://github.com/emirkabal/better-instagram-controls/assets/28771692/7b96c062-2f84-4da1-a0c3-94d45284dc8d)
+![Screenshot](https://github.com/emirkabal/better-instagram-videos/assets/28771692/7b96c062-2f84-4da1-a0c3-94d45284dc8d)
 
 # Example Video
 
-https://github.com/emirkabal/better-instagram-controls/assets/28771692/29fe5775-be3a-429f-8bc0-7f00c34b1ddb
+https://github.com/emirkabal/better-instagram-videos/assets/28771692/29fe5775-be3a-429f-8bc0-7f00c34b1ddb
 
 ## Contrubition
 
-We welcome contributions from the community! If you have ideas for improvements or find any issues, please open an [issue](https://github.com/emirkabal/better-instagram-controls/issues) or submit a pull request.
+We welcome contributions from the community! If you have ideas for improvements or find any issues, please open an [issue](https://github.com/emirkabal/better-instagram-videos/issues) or submit a pull request.
 
 **Installation:**
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/emirkabal/better-instagram-controls.git
+   git clone https://github.com/emirkabal/better-instagram-videos.git
    ```
 
 2. **Navigate to the project directory:**
 
    ```bash
-   cd better-instagram-controls
+   cd better-instagram-videos
    ```
 
 3. **Install dependencies:**
@@ -68,7 +68,7 @@ We welcome contributions from the community! If you have ideas for improvements 
    - Select the `dist` directory within the project folder.
    - Or you can drag and drop `dist` directory to extensions area.
 
-The Better Instagram Controls extension should now be installed in your Chrome browser.
+The Better Instagram Videos extension should now be installed in your Chrome browser.
 
 ## Legal
 

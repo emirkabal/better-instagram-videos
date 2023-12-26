@@ -20,7 +20,7 @@ export default function Controller({ video, igData }: Props) {
   const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
 
-  const storageV = localStorage.getItem("better-instagram-controls-volume")
+  const storageV = localStorage.getItem("better-instagram-videos-volume")
   const volume = useRef(
     storageV && !isNaN(storageV as any) ? parseFloat(storageV) : 0.5
   )
@@ -79,7 +79,7 @@ export default function Controller({ video, igData }: Props) {
         onDragging={(_) => {
           if (!_)
             localStorage.setItem(
-              "better-instagram-controls-volume",
+              "better-instagram-videos-volume",
               volume.current.toString()
             )
         }}

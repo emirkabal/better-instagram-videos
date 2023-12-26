@@ -13,7 +13,7 @@ async function syncVersion() {
 }
 
 async function createArchive() {
-  const name = `${dir}/better-instagram-controls-${version}.zip`
+  const name = `${dir}/better-instagram-videos-${version}.zip`
   const archive = archiver("zip", { zlib: { level: 9 } })
   const stream = fs.createWriteStream(name)
 
