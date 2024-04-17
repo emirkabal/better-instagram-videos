@@ -26,10 +26,10 @@ export default class IntervalInjector extends Injector {
       const video = videos[i]
       if (
         this.isInjected(video as HTMLVideoElement) ||
-        video.hasAttribute("better-ig-attached-listeners")
+        video.hasAttribute("bigv-attached-listeners")
       )
         continue
-      video.setAttribute("better-ig-attached-listeners", "")
+      video.setAttribute("bigv-attached-listeners", "")
       ;["play", "timeupdate", "playing"].forEach((event) => {
         video.addEventListener(event, () => {
           this.inject(video as HTMLVideoElement, video.parentElement!)

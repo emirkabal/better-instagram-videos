@@ -42,6 +42,17 @@ export default function Controller({ video, igData }: Props) {
     videoRef.current.addEventListener("play", () => {
       updateMuted()
     })
+
+    videoRef.current.addEventListener("ended", () => {
+      const autoSkip = localStorage.getItem("bigv-autoskip")
+      if (
+        autoSkip === "true" &&
+        document.location.pathname.startsWith("/reels")
+      ) {
+        const snap = document.querySelector('[role="main"]>:last-child')
+        if (snap) snap.scrollBy(0, 1000)
+      }
+    })
   }, [])
 
   useEffect(() => {

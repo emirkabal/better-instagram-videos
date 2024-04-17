@@ -90,6 +90,10 @@ export default class Injector {
    */
   public wayToInject() {}
 
+  get lastInjected() {
+    return this.injectedList[this.injectedList.length - 1]
+  }
+
   private clear() {
     if (
       this.injectedList.length > this.MIN_REMOVE_COUNT &&
@@ -126,17 +130,17 @@ export default class Injector {
       !video ||
       !video?.parentElement ||
       !video?.src ||
-      video?.hasAttribute("better-ig-injected")
+      video?.hasAttribute("bigv-injected")
     )
       return
 
     this.beforeInject()
     this.clear()
 
-    video.setAttribute("better-ig-injected", "")
+    video.setAttribute("bigv-injected", "")
 
     const controller = document.createElement("div")
-    controller.setAttribute("better-ig-inject", "")
+    controller.setAttribute("bigv-inject", "")
 
     video.parentElement.style.setProperty("position", "relative")
     video.parentElement.appendChild(controller)
@@ -160,6 +164,6 @@ export default class Injector {
   }
 
   public isInjected(video: HTMLVideoElement) {
-    return video.hasAttribute("better-ig-injected")
+    return video.hasAttribute("bigv-injected")
   }
 }
