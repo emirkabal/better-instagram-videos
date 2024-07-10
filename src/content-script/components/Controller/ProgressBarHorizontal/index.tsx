@@ -30,7 +30,7 @@ export default function ProgressBarHorizontal({
     const width = rect.width
     const percent = x / width
     if (percent >= 0 && percent <= 1) {
-      setPointerPosition(x - 1)
+      setPointerPosition(x)
       setProgressBar(percent * 100)
       if (onProgress) onProgress(percent * 100)
     }

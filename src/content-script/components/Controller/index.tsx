@@ -6,6 +6,7 @@ import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
 import VolumeButton from "./Buttons/Volume"
 import DownloadButton from "./Buttons/Download"
+import SmartContainer from "./SmartContainer"
 
 type Props = {
   igData?: {
@@ -19,6 +20,7 @@ export default function Controller({ video, igData }: Props) {
   const videoRef = useRef<HTMLVideoElement>(video)
   const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const [volumeDragging, setVolumeDragging] = useState(false)
 
   const storageV = localStorage.getItem("better-instagram-videos-volume")
   const volume = useRef(
@@ -76,25 +78,28 @@ export default function Controller({ video, igData }: Props) {
 
   return (
     <>
-      <VolumeButton
-        muted={muted.current}
-        onChange={(_) => (muted.current = _)}
-      />
-      <ProgressBarVertical
-        progress={volume.current * 100}
-        onProgress={(_) => {
-          const progress = _ / 100
-          videoRef.current.volume = progress
-          volume.current = progress
-        }}
-        onDragging={(_) => {
-          if (!_)
-            localStorage.setItem(
-              "better-instagram-videos-volume",
-              volume.current.toString()
-            )
-        }}
-      />
+      <SmartContainer dragging={volumeDragging}>
+        <VolumeButton
+          muted={muted.current}
+          onChange={(_) => (muted.current = _)}
+        />
+        <ProgressBarVertical
+          progress={volume.current * 100}
+          onProgress={(_) => {
+            const progress = _ / 100
+            videoRef.current.volume = progress
+            volume.current = progress
+          }}
+          onDragging={(_) => {
+            setVolumeDragging(_)
+            if (!_)
+              localStorage.setItem(
+                "better-instagram-videos-volume",
+                volume.current.toString()
+              )
+          }}
+        />
+      </SmartContainer>
       <div className="better-ig-controller">
         {video && (
           <Container

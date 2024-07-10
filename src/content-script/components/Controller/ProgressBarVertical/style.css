@@ -5,24 +5,14 @@
   align-items: center;
   -webkit-user-drag: unset;
   user-select: none;
-  position: absolute;
   transform: rotate3d(0, 0, 1, -180deg);
-  top: 0;
-  right: 0;
-  margin: 32px 12px;
-  opacity: 0.4;
-  transition: opacity 0.2s ease-out;
-}
-
-.better-ig-progress-bar-vertical:hover {
-  opacity: 1;
 }
 
 .better-ig-progress-bar-vertical .baseline {
   width: 3px;
   height: 52px;
   border-radius: 10px;
-  background: #9a9a9a92;
+  background: #7c7c7c;
   cursor: pointer;
   position: relative;
 }

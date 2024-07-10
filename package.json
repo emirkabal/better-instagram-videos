@@ -1,7 +1,7 @@
 {
   "name": "better-instagram-videos",
   "description": "Easily control the playback and volume of any Instagram videos.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,9 @@
     "lint:fix": "prettier --write ."
   },
   "dependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "classnames": "^2.5.1",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

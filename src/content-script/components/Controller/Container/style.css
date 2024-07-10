@@ -9,6 +9,7 @@
 
 .better-ig-controller > .container > .buttons {
   display: flex;
+  position: absolute;
   align-items: center;
   gap: 0 8px;
   padding: 0 8px;
@@ -16,11 +17,11 @@
 }
 
 .better-ig-controller > .container > .content {
-  width: 100%;
+  width: 85%;
   max-height: 56px;
   display: flex;
-  margin: 6px;
-  border-radius: 8px;
+  margin: 3px auto;
+  border-radius: 9999px;
   transition: background 0.2s ease-in-out;
 }
 
@@ -32,12 +33,32 @@
   align-items: center;
   gap: 0 8px;
   padding: 2px 8px;
-  opacity: 0.4;
+  opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
 
-.better-ig-controller > .container > .content:hover {
-  background: #202020e1;
+.better-ig-controller > .container > .content {
+  transition: all 0.2s ease-in-out;
+  transform: translateY(16px);
+  /* From https://css.glass */
+  background: rgba(219, 219, 219, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.better-ig-controller > .container:hover > .content {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.better-ig-controller > .container > .content.active {
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .better-ig-controller > .container > .content:hover .content-inner {

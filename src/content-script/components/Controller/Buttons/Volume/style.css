@@ -1,9 +1,11 @@
 .better-ig-volume-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 4px 5px;
   cursor: pointer;
+  flex-shrink: 0;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .better-ig-volume-button svg {
