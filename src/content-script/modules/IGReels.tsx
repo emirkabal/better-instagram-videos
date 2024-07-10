@@ -8,9 +8,14 @@ export default class IGReels extends IntervalInjector {
   }
 
   public beforeInject(): void {
-    document.querySelectorAll('div[tabindex="0"] > svg').forEach((svg) => {
-      svg.parentElement?.remove()
-    })
+    // Remove the mute & unmute button
+    document
+      .querySelectorAll(
+        'div[aria-disabled="false"][role="button"] > div > div[tabindex="0"][role="button"] > svg'
+      )
+      .forEach((svg) => {
+        svg.parentElement?.remove()
+      })
   }
 
   public injected(): void {
