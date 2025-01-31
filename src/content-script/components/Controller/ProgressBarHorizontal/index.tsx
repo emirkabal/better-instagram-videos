@@ -51,7 +51,6 @@ export default function ProgressBarHorizontal({
       setProgressBar(Math.round(percent * 10000) / 100)
       if (onProgress) onProgress(Math.round(percent * 10000) / 100)
 
-      // Tooltip pozisyonunu güncelle
       const tooltipWidth = 60
       const maxPosition = width - tooltipWidth / 2
       const minPosition = tooltipWidth / 2
@@ -115,13 +114,11 @@ export default function ProgressBarHorizontal({
 
     const width = rect.width
     const x = Math.min(Math.max(e.clientX - rect.left, 0), width)
-    const tooltipWidth = 60 // Tooltip genişliği için yaklaşık bir değer
+    const tooltipWidth = 60
     const maxPosition = width - tooltipWidth / 2
     const minPosition = tooltipWidth / 2
 
-    // Tooltip pozisyonunu sınırlandır
     setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
-    // Mouse pozisyonunu ayrıca tut (süre hesaplaması için)
     setMousePosition(x / width)
     setShowTooltip(true)
   }

@@ -1,6 +1,7 @@
 import path from "node:path"
 import fs from "fs-extra"
 import archiver from "archiver"
+import { exec } from "node:child_process"
 const dir = "build"
 
 const version = process.env.npm_package_version || "0.0.0"
@@ -37,6 +38,9 @@ async function build() {
   await fs.mkdir(dir)
 
   await syncVersion()
+
+  console.info("Building distribution...")
+  await exec("pnpm run build")
 
   try {
     await createArchive()

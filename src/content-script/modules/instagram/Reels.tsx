@@ -5,11 +5,23 @@ import { InjectedProps } from "../Injector"
 
 export default class Reels extends IntervalInjector {
   private commentsInterval: NodeJS.Timeout | null = null
-  private commentsDialogOpened = false
+  private pauseOnComments = true
+
   constructor(options?: IntervalInjectorOptions) {
     super({
       ...options,
       variant: "reels"
+    })
+
+    chrome.storage.sync.get(["bigv-pause-on-comments"], (result) => {
+      this.pauseOnComments = result["bigv-pause-on-comments"] ?? true
+    })
+
+    chrome.storage.sync.onChanged.addListener((changes) => {
+      if (changes["bigv-pause-on-comments"]) {
+        this.pauseOnComments =
+          changes["bigv-pause-on-comments"].newValue ?? true
+      }
     })
   }
 
@@ -49,15 +61,17 @@ export default class Reels extends IntervalInjector {
       <Buttons ctx={{ download: props.downloadableMedia ?? undefined }} />
     )
 
+    if (this.commentsInterval) clearInterval(this.commentsInterval)
+
     this.commentsInterval = setInterval(() => {
+      if (!this.pauseOnComments) return
+
       const commentsDialog = document.querySelector("div[role='dialog']")
-      if (commentsDialog && !this.commentsDialogOpened) {
-        this.commentsDialogOpened = true
-        props.video.pause()
-      } else if (!commentsDialog && this.commentsDialogOpened) {
-        this.commentsDialogOpened = false
-        props.video.play()
+      if (commentsDialog) {
+        document.querySelectorAll("video").forEach((v) => {
+          if (!v.paused) v.pause()
+        })
       }
-    }, 100)
+    }, 750)
   }
 }

@@ -1,14 +1,14 @@
 import "./style.css"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { useStorage } from "@/hooks/useStorage"
 
-import Container from "./Container"
 import ProgressBarHorizontal from "./ProgressBarHorizontal"
 import ProgressBarVertical from "./ProgressBarVertical"
 import VolumeButton from "./Buttons/Volume"
 import DownloadButton from "./Buttons/Download"
 import SmartContainer from "./SmartContainer"
-import { useLocalStorage } from "usehooks-ts"
 import { DownloadableMedia, Variant } from "@/content-script/modules/Injector"
+import { useLocalStorage } from "usehooks-ts"
 
 type Props = {
   downloadableMedia?: DownloadableMedia
@@ -34,6 +34,7 @@ export default function Controller({
     "better-instagram-videos-muted",
     false
   )
+  const [maxVolumeBalance] = useStorage("bigv-max-volume-balance", 100)
 
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
@@ -97,9 +98,9 @@ export default function Controller({
       <SmartContainer dragging={volumeDragging}>
         <VolumeButton muted={muted} onChange={(_) => setMuted(_)} />
         <ProgressBarVertical
-          progress={volume * 150}
+          progress={volume * maxVolumeBalance}
           onProgress={(_) => {
-            const ps = _ / 150
+            const ps = _ / maxVolumeBalance
             setVolume(ps)
           }}
           onDragging={(_) => {
