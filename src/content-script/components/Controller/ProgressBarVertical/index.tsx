@@ -26,12 +26,12 @@ export default function ProgressBarVertical({
     const rect = dragareaRef.current?.getBoundingClientRect()
     if (!rect) return
     const height = rect.height - 6
-    const y = -(e.clientY - rect.top) + height
-    const percent = y / height
+    const y = Math.min(Math.max(-(e.clientY - rect.top) + height, 0), height)
+    const percent = Number((y / height).toFixed(4))
     if (percent >= 0 && percent <= 1) {
       setPointerPosition(y)
-      setProgressBar(percent * 100)
-      if (onProgress) onProgress(percent * 100)
+      setProgressBar(Math.round(percent * 10000) / 100)
+      if (onProgress) onProgress(Math.round(percent * 10000) / 100)
     }
   }
 
@@ -107,7 +107,7 @@ export default function ProgressBarVertical({
           className="fill"
           style={{
             height: `${
-              progressBar > 98 ? 100 : progressBar < 3.5 ? 0 : progressBar
+              progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar
             }%`
           }}
         ></div>

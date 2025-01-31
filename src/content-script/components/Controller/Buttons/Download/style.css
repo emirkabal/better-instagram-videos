@@ -1,12 +1,24 @@
-.better-ig-download {
-  color: white;
+.bigv-inside-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
   width: 24px;
-  height: auto;
+  height: 24px;
   cursor: pointer;
-  opacity: 0.4;
-  transition: opacity 0.2s ease-out;
+  z-index: 100;
+  opacity: 0.5;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.7));
 }
 
-.better-ig-download:hover {
+.bigv-inside-download:hover {
   opacity: 1;
+}
+
+.bigv-inside-download svg {
+  width: 24px;
+  height: 24px;
 }

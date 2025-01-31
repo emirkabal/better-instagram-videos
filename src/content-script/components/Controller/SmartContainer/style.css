@@ -4,21 +4,22 @@
   right: 0;
   margin: 12px;
   /* padding: 4px 6px 10px 6px; */
+  opacity: 0.5;
   overflow: hidden;
   height: 30px;
   width: 30px;
   transition: all 0.2s ease-in-out;
   border-radius: 9999px;
-  background: rgba(219, 219, 219, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(35, 35, 35, 0.75);
+  border: 1px solid rgb(109, 101, 101, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 99999;
   box-sizing: border-box;
-  box-shadow:
+  /* box-shadow:
     rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    rgba(17, 17, 26, 0.1) 0px 16px 56px; */
 }
 
 .bgv-smart-container:hover .bgv-smart-container {

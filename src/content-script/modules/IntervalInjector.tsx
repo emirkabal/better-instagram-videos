@@ -1,18 +1,18 @@
 import Injector, { InjectorOptions } from "./Injector"
 
 interface Options {
-  INTERVAL_MS?: number
+  intervalMs?: number
 }
 
 export type IntervalInjectorOptions = Options & InjectorOptions
 
 export default class IntervalInjector extends Injector {
-  private INTERVAL_MS = 100
+  private intervalMs = 100
   private interval: NodeJS.Timeout | number | undefined
 
   constructor(options?: IntervalInjectorOptions) {
     super(options)
-    this.INTERVAL_MS = options?.INTERVAL_MS || this.INTERVAL_MS
+    this.intervalMs = options?.intervalMs || this.intervalMs
   }
 
   public deleted(): void {
@@ -41,6 +41,6 @@ export default class IntervalInjector extends Injector {
   public wayToInject(): void {
     if (this.interval) clearInterval(this.interval)
     this.injectMethod()
-    this.interval = setInterval(() => this.injectMethod(), this.INTERVAL_MS)
+    this.interval = setInterval(() => this.injectMethod(), this.intervalMs)
   }
 }

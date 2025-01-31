@@ -2,24 +2,37 @@ import { createRoot } from "react-dom/client"
 import Controller from "../components/Controller"
 
 export type Injected = [HTMLVideoElement, HTMLElement][]
-
+export type DownloadableMedia = {
+  id: string
+  index?: number
+}
+export type Variant = "default" | "reels" | "stories"
 export interface InjectorOptions {
-  IMPROVE_PERFORMANCE?: boolean
-  MIN_REMOVE_COUNT?: number
-  REMOVE_COUNT?: number
+  improvePerformance?: boolean
+  minRemoveCount?: number
+  removeCount?: number
+  variant?: Variant
+}
+
+export interface InjectedProps {
+  video: HTMLVideoElement
+  downloadableMedia?: DownloadableMedia
 }
 
 export default class Injector {
-  private IMPROVE_PERFORMANCE = false
-  private MIN_REMOVE_COUNT = 4
-  private REMOVE_COUNT = 3
+  private improvePerformance = false
+  private minRemoveCount = 4
+  private removeCount = 3
+  private variant: Variant = "default"
+
   private injectedList: Injected = []
 
   constructor(options: InjectorOptions | undefined) {
-    this.MIN_REMOVE_COUNT = options?.MIN_REMOVE_COUNT || this.MIN_REMOVE_COUNT
-    this.REMOVE_COUNT = options?.REMOVE_COUNT || this.REMOVE_COUNT
-    this.IMPROVE_PERFORMANCE =
-      options?.IMPROVE_PERFORMANCE || this.IMPROVE_PERFORMANCE
+    this.minRemoveCount = options?.minRemoveCount || this.minRemoveCount
+    this.removeCount = options?.removeCount || this.removeCount
+    this.improvePerformance =
+      options?.improvePerformance || this.improvePerformance
+    this.variant = options?.variant || this.variant
   }
 
   /**
@@ -34,10 +47,11 @@ export default class Injector {
    * ```
    * @returns {void}
    */
-  public beforeInject() {}
+  public beforeInject(): void {}
 
   /**
    * This method is called after the elements are injected.
+   * @param props {InjectedProps}
    * @example
    * ```ts
    * const injector = new Injector();
@@ -47,7 +61,7 @@ export default class Injector {
    * injector.inject();
    * ```
    */
-  public injected() {}
+  public injected(props: InjectedProps): void {}
 
   /**
    * This method is called before the elements are deleted.
@@ -60,7 +74,7 @@ export default class Injector {
    * injector.delete();
    * ```
    */
-  public beforeDelete() {}
+  public beforeDelete(): void {}
 
   /**
    * This method is called after the elements are deleted.
@@ -73,7 +87,7 @@ export default class Injector {
    * injector.delete();
    * ```
    */
-  public deleted() {}
+  public deleted(): void {}
 
   /**
    * This method is custom way to inject.
@@ -88,7 +102,7 @@ export default class Injector {
    * injector.wayToInject();
    * ```
    */
-  public wayToInject() {}
+  public wayToInject(): void {}
 
   get lastInjected() {
     return this.injectedList[this.injectedList.length - 1]
@@ -96,10 +110,10 @@ export default class Injector {
 
   private clear() {
     if (
-      this.injectedList.length > this.MIN_REMOVE_COUNT &&
-      this.IMPROVE_PERFORMANCE
+      this.injectedList.length > this.minRemoveCount &&
+      this.improvePerformance
     ) {
-      for (let i = 0; i < this.REMOVE_COUNT; i++) {
+      for (let i = 0; i < this.removeCount; i++) {
         const [_, parent] = this.injectedList.shift()!
         parent.remove()
       }
@@ -125,7 +139,7 @@ export default class Injector {
    * @param parent {HTMLElement}
    * @returns {void}
    */
-  public inject(video: HTMLVideoElement, parent: HTMLElement) {
+  public inject(video: HTMLVideoElement, parent: HTMLElement): void {
     if (
       !video ||
       !video?.parentElement ||
@@ -150,20 +164,31 @@ export default class Injector {
     const id = location.pathname.split("/")[2]
     const params = new URLSearchParams(location.search)
     const index = params.get("img_index")
-    const igData: any = {}
-    if (id) igData.id = id
-    if (index) igData.index = parseInt(index)
+    const downloadableMedia: DownloadableMedia = {
+      id: id ?? "",
+      index: index ? parseInt(index) : undefined
+    }
 
     createRoot(controller).render(
-      <Controller video={video} igData={igData?.id ? igData : undefined} />
+      <Controller
+        video={video}
+        variant={this.variant}
+        downloadableMedia={
+          downloadableMedia.id !== "" ? downloadableMedia : undefined
+        }
+      />
     )
 
     this.injectedList.push([video, parent])
 
-    this.injected()
+    this.injected({
+      video,
+      downloadableMedia:
+        downloadableMedia.id !== "" ? downloadableMedia : undefined
+    })
   }
 
-  public isInjected(video: HTMLVideoElement) {
+  public isInjected(video: HTMLVideoElement): boolean {
     return video.hasAttribute("bigv-injected")
   }
 }

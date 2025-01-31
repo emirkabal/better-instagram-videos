@@ -6,45 +6,65 @@ type Props = {
   chunksVal?: number
   onProgress?: (progress: number) => void
   onDragging?: (dragging: boolean) => void
+  videoDuration?: number
 }
 
 export default function ProgressBarHorizontal({
   progress = 0,
   chunksVal = 0,
   onProgress,
-  onDragging
+  onDragging,
+  videoDuration = 0
 }: Props) {
   const [chunks, setChunks] = useState(chunksVal)
   const [progressBar, setProgressBar] = useState(progress)
-  const [pointerPosition, setPointerPosition] = useState(0)
   const [isDragging, setDragging] = useState(false)
+  const [tooltipPosition, setTooltipPosition] = useState(0)
+  const [showTooltip, setShowTooltip] = useState(false)
   const dragareaRef = useRef<HTMLDivElement>(null)
+  const [mousePosition, setMousePosition] = useState(0)
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = (seconds % 60).toFixed(1)
+
+    if (minutes === 0) {
+      return `${remainingSeconds}s`
+    }
+    return `${minutes}:${Math.floor(Number(remainingSeconds))
+      .toString()
+      .padStart(2, "0")}`
+  }
 
   let lastX = 0
   const mouseMoveEvent = (e: MouseEvent, click = false) => {
-    if ((e.clientX === lastX || !isDragging) && !click) return
-    lastX = 0
+    if (!click && !isDragging) return
+
     const rect = dragareaRef.current?.getBoundingClientRect()
     if (!rect) return
-    const x = e.clientX - rect.left
+
     const width = rect.width
-    const percent = x / width
+    const x = Math.min(Math.max(e.clientX - rect.left, 0), width)
+    const percent = Number((x / width).toFixed(4))
+
     if (percent >= 0 && percent <= 1) {
-      setPointerPosition(x)
-      setProgressBar(percent * 100)
-      if (onProgress) onProgress(percent * 100)
+      setProgressBar(Math.round(percent * 10000) / 100)
+      if (onProgress) onProgress(Math.round(percent * 10000) / 100)
+
+      // Tooltip pozisyonunu güncelle
+      const tooltipWidth = 60
+      const maxPosition = width - tooltipWidth / 2
+      const minPosition = tooltipWidth / 2
+      setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
+      setMousePosition(percent)
     }
+
+    lastX = e.clientX
   }
 
   const updateProgressBar = () => {
     if (isNaN(progress) || isDragging) return
     setProgressBar(progress)
-    const rect = dragareaRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const width = rect.width
-    const percent = progress / 100
-    const x = width * percent
-    setPointerPosition(x)
   }
 
   useEffect(() => {
@@ -66,7 +86,6 @@ export default function ProgressBarHorizontal({
     const width = rect.width
     const percent = progressBar / 100
     const x = width * percent
-    setPointerPosition(x)
     setProgressBar(progressBar)
   }
 
@@ -90,12 +109,31 @@ export default function ProgressBarHorizontal({
     if (onDragging) onDragging(isDragging)
   }, [isDragging])
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = dragareaRef.current?.getBoundingClientRect()
+    if (!rect) return
+
+    const width = rect.width
+    const x = Math.min(Math.max(e.clientX - rect.left, 0), width)
+    const tooltipWidth = 60 // Tooltip genişliği için yaklaşık bir değer
+    const maxPosition = width - tooltipWidth / 2
+    const minPosition = tooltipWidth / 2
+
+    // Tooltip pozisyonunu sınırlandır
+    setTooltipPosition(Math.min(Math.max(x, minPosition), maxPosition))
+    // Mouse pozisyonunu ayrıca tut (süre hesaplaması için)
+    setMousePosition(x / width)
+    setShowTooltip(true)
+  }
+
   return (
     <div className="progress-bar-horizontal">
-      <div className="baseline">
+      <div className={`baseline ${isDragging ? "dragging" : ""}`}>
         <div
           ref={dragareaRef}
           className="dragarea"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setShowTooltip(false)}
           onMouseDown={(e) => [
             setDragging(true),
             mouseMoveEvent(e as any as MouseEvent, true)
@@ -104,7 +142,9 @@ export default function ProgressBarHorizontal({
         <div
           className="fill"
           style={{
-            width: `${progressBar}%`
+            width: `${
+              progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar
+            }%`
           }}
         ></div>
         <div
@@ -113,13 +153,18 @@ export default function ProgressBarHorizontal({
             width: `${chunks}%`
           }}
         ></div>
-        <div
-          className="pointer"
-          style={{
-            transform: `translate3d(${pointerPosition - 4}px,0,0)`,
-            opacity: isDragging ? 1 : 0
-          }}
-        ></div>
+        {(showTooltip || isDragging) && (
+          <div
+            className={`better-ig-progress-tooltip ${
+              showTooltip || isDragging ? "visible" : ""
+            }`}
+            style={{
+              left: tooltipPosition
+            }}
+          >
+            {formatTime(mousePosition * videoDuration)}
+          </div>
+        )}
       </div>
     </div>
   )

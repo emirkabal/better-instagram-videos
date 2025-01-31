@@ -1,6 +1,6 @@
-import IntervalInjector, { IntervalInjectorOptions } from "./IntervalInjector"
+import IntervalInjector, { IntervalInjectorOptions } from "../IntervalInjector"
 
-export default class IGHome extends IntervalInjector {
+export default class Home extends IntervalInjector {
   constructor(options?: IntervalInjectorOptions) {
     super(options)
   }
