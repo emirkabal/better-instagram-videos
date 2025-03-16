@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Daha İyi Instagram Videoları: Oynatma ve Ses Seviyesi"
+  },
+  "appDescription": {
+    "message": "Instagram videosunu indirin, ses seviyesini ayarlayın ve istediğiniz saniyeye sarın."
+  },
+
+  "autoskipLabel": {
+    "message": "Oto-geç"
+  },
+  "downloadLabel": {
+    "message": "İndir"
+  }
+}

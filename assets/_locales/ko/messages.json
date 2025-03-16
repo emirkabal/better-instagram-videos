@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Instagram 비디오 개선: 재생 및 볼륨"
+  },
+  "appDescription": {
+    "message": "Instagram 동영상의 재생 및 볼륨을 쉽게 제어할 수 있습니다."
+  },
+
+  "autoskipLabel": {
+    "message": "자동 스킵"
+  },
+  "downloadLabel": {
+    "message": "다운로드"
+  }
+}

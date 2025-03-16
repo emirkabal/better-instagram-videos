@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Better Instagram Videos: Playback & Volume"
+  },
+  "appDescription": {
+    "message": "Easily control the playback and volume of any Instagram videos."
+  },
+
+  "autoskipLabel": {
+    "message": "Auto-skip"
+  },
+  "downloadLabel": {
+    "message": "Download"
+  }
+}
