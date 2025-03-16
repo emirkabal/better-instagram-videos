@@ -1,6 +1,6 @@
 # Better Instagram Videos
 
-<img align="right" src="/public/icons/logo128.png" width=96 alt="Better Instagram Videos Logo">
+<img align="right" src="/assets/icon.png" width=96 alt="Better Instagram Videos Logo">
 
 Better Instagram Videos is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
 
