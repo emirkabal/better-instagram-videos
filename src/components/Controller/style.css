@@ -100,9 +100,9 @@
 }
 
 .bigv-buttons label input:checked + .bigv-slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(32px);
+  -ms-transform: translateX(32px);
+  transform: translateX(32x);
 }
 
 .bigv-buttons svg {

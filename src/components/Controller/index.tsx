@@ -45,6 +45,11 @@ export default function Controller({
   const updateAudio = useCallback(() => {
     const normalizedVolume = Math.min(volume, 1)
     videoRef.current.volume = normalizedVolume
+    if (
+      "userActivation" in navigator &&
+      !navigator.userActivation.hasBeenActive
+    )
+      setMuted(true)
     videoRef.current.muted = muted
   }, [videoRef, volume, muted])
 

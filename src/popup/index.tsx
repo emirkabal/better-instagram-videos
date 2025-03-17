@@ -1,6 +1,6 @@
-import { version } from "package.json"
-
 import { useStorage } from "@plasmohq/storage/hook"
+
+import { version } from "../../package.json"
 
 import "./style.css"
 
