@@ -1,4 +1,10 @@
+import type { PlasmoCSConfig } from "plasmo"
+
 import { Home, Reels, Stories } from "~modules/instagram"
+
+export const config: PlasmoCSConfig = {
+  matches: ["https://www.instagram.com/*"]
+}
 
 const REGEX =
   /^(?:https?:\/\/(?:www\.)?instagram\.com)?(?:\/[\w.-]+)?\/(stories|reels|reel|tv|p)\/([\w.-]+)(?:\/([\w.-]+))?\/?$/i
