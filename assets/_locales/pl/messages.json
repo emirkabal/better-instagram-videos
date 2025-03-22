@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Lepsze filmy na Instagramie: Odtwarzanie i głośność"
+  },
+  "appDescription": {
+    "message": "Z łatwością kontroluj odtwarzanie i głośność dowolnych filmów na Instagramie."
+  },
+
+  "autoskipLabel": {
+    "message": "Auto-skip"
+  },
+  "downloadLabel": {
+    "message": "Pobierz"
+  }
+}

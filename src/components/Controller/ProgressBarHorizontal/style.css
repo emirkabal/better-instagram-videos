@@ -1,0 +1,101 @@
+.better-ig-controller .progress-bar-horizontal {
+  width: 100%;
+  height: 12px;
+  display: flex;
+  align-items: end;
+  -webkit-user-drag: unset;
+  user-select: none;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline {
+  width: 100%;
+  height: 4px;
+  background: #6b6b6ba2;
+  cursor: pointer;
+  position: relative;
+  transition: height 100ms linear;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .fill {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 100ms linear;
+  will-change: transform;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .fill.no-transition {
+  transition: none;
+  will-change: none;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .chunks {
+  width: 0;
+  height: 100%;
+  background: #dbdbdb96;
+  position: absolute;
+  top: 0;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .pointer {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  transform: translate3d(10px, 0, 0);
+  will-change: trasform;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .dragarea {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  z-index: 60;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline:hover {
+  height: 10px;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline.dragging {
+  height: 10px;
+}
+
+.better-ig-progress-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  min-width: 44px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.better-ig-progress-tooltip.stories {
+  bottom: 0;
+  top: 20px;
+  z-index: 99999;
+  height: 18px;
+}
+
+.better-ig-progress-tooltip.visible {
+  opacity: 1;
+}

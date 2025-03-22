@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Лучшие видео в Instagram: Воспроизведение и громкость"
+  },
+  "appDescription": {
+    "message": "Легко управлять воспроизведением и громкостью любых видеороликов Instagram."
+  },
+
+  "autoskipLabel": {
+    "message": "Auto-skip"
+  },
+  "downloadLabel": {
+    "message": "Скачать"
+  }
+}
