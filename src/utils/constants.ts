@@ -1,5 +1,5 @@
 export const IG_STORIES_VOLUME_INDICATOR =
-	'div[aria-label][role="button"]:has(> div > svg)';
+  'div[aria-label][role="button"]:has(> div > svg)'
 export const IG_REELS_VOLUME_INDICATOR =
-	'div[aria-disabled="false"][role="button"] > div > div[tabindex="0"][role="button"] > svg';
-export const IG_HOME_VOLUME_INDICATOR = "div > button[aria-label] > div > svg";
+  'div[aria-disabled="false"][role="button"] > div > div[tabindex="0"][role="button"] > svg'
+export const IG_HOME_VOLUME_INDICATOR = "div > button[aria-label] > div > svg"

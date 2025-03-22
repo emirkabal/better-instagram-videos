@@ -1,14 +1,16 @@
 {
   "name": "better-instagram-videos",
   "displayName": "Better instagram videos",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Easily control the playback and volume of any Instagram videos.",
   "author": "Emir Kabal <me@emirkabal.com>",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package",
-    "package-all": "plasmo build && plasmo build --target=firefox-mv2 && plasmo package && plasmo package --target=firefox-mv2"
+    "package-all": "plasmo build && plasmo build --target=firefox-mv2 && plasmo package && plasmo package --target=firefox-mv2",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@plasmohq/storage": "^1.15.0",

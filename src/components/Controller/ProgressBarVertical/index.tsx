@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+
 import "./style.css"
 
 type Props = {
@@ -92,8 +93,7 @@ export default function ProgressBarVertical({
   return (
     <div
       className="better-ig-progress-bar-vertical"
-      style={isDragging ? { opacity: 1 } : undefined}
-    >
+      style={isDragging ? { opacity: 1 } : undefined}>
       <div className="baseline">
         <div
           ref={dragareaRef}
@@ -101,23 +101,20 @@ export default function ProgressBarVertical({
           onMouseDown={(e) => [
             setDragging(true),
             mouseMoveEvent(e as any as MouseEvent, true)
-          ]}
-        ></div>
+          ]}></div>
         <div
           className="fill"
           style={{
             height: `${
               progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar
             }%`
-          }}
-        ></div>
+          }}></div>
         <div
           className="pointer"
           style={{
             transform: `translate3d(0,${pointerPosition}px,0)`,
             opacity: isDragging ? 1 : 0
-          }}
-        ></div>
+          }}></div>
       </div>
     </div>
   )
