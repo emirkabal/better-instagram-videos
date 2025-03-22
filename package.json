@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "package": "plasmo package",
+    "package-all": "plasmo build && plasmo build --target=firefox-mv2 && plasmo package && plasmo package --target=firefox-mv2"
   },
   "dependencies": {
     "@plasmohq/storage": "^1.15.0",
