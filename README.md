@@ -10,7 +10,7 @@ Better Instagram Videos is a browser extension available on the Chrome Web Store
 - Volume control (remembered)
 - Downloadable video
 - Autoskip support
-- Supports all videos on the Instagram except stories section
+- Supports all videos on the Instagram
 
 ## Usage
 
