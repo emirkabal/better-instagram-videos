@@ -12,9 +12,16 @@ Better Instagram Videos is a browser extension available on the Chrome Web Store
 - Autoskip support
 - Supports all videos on the Instagram
 
+<a href="https://chromewebstore.google.com/detail/ijgmchfimkocepiapjeoehcicfnhhchp" target="_">
+   <img src="https://github.com/user-attachments/assets/9eefa009-9fdb-4b59-979e-6aff439f9ef3" height=48 alt="Chrome Add-on Store Logo">
+</a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/better-instagram-videos" target="_">
+   <img src="https://github.com/user-attachments/assets/f1af1b1b-6a28-4038-8efe-da88bf2a9c6a" height=48 alt="Firefox Add-on Store Logo">
+</a>
+
 ## Usage
 
-After [installation](https://chromewebstore.google.com/detail/better-instagram-videos/aklkofahlebncdnciilboglligohenki), you can use the extension to control video playback and adjust volume on Instagram effortlessly.
+After installation, you can use the extension to control video playback and adjust volume on Instagram effortlessly.
 
 ![Screenshot](https://github.com/emirkabal/better-instagram-videos/assets/28771692/7b96c062-2f84-4da1-a0c3-94d45284dc8d)
 
