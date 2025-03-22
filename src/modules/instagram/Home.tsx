@@ -1,3 +1,5 @@
+import { IG_HOME_VOLUME_INDICATOR } from "~utils/constants"
+
 import IntervalInjector, {
   type IntervalInjectorOptions
 } from "../IntervalInjector"
@@ -8,10 +10,8 @@ export default class Home extends IntervalInjector {
   }
 
   public beforeInject(): void {
-    document
-      .querySelectorAll("div > button[aria-label] > div > svg")
-      .forEach((svg) => {
-        svg.parentElement?.parentElement?.parentElement?.remove()
-      })
+    document.querySelectorAll(IG_HOME_VOLUME_INDICATOR).forEach((svg) => {
+      svg.parentElement?.parentElement?.parentElement?.remove()
+    })
   }
 }

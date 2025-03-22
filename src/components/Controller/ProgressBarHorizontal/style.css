@@ -10,19 +10,28 @@
 .better-ig-controller .progress-bar-horizontal .baseline {
   width: 100%;
   height: 4px;
-  background: #7c7c7c;
+  background: #6b6b6ba2;
   cursor: pointer;
   position: relative;
-  transition: height 0.2s ease-out;
+  transition: height 100ms linear;
 }
 
 .better-ig-controller .progress-bar-horizontal .baseline .fill {
-  width: 0;
+  width: 100%;
   height: 100%;
   background: #ffffff;
   position: absolute;
   top: 0;
   z-index: 10;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 100ms linear;
+  will-change: transform;
+}
+
+.better-ig-controller .progress-bar-horizontal .baseline .fill.no-transition {
+  transition: none;
+  will-change: none;
 }
 
 .better-ig-controller .progress-bar-horizontal .baseline .chunks {
@@ -43,7 +52,6 @@
   left: 0;
   transform: translate3d(10px, 0, 0);
   will-change: trasform;
-  transition: opacity 0.2s ease-out;
 }
 
 .better-ig-controller .progress-bar-horizontal .baseline .dragarea {
@@ -63,10 +71,7 @@
   height: 10px;
 }
 
-.better-ig-controller
-  .progress-bar-horizontal
-  .baseline
-  .better-ig-progress-tooltip {
+.better-ig-progress-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -84,13 +89,13 @@
   white-space: nowrap;
 }
 
-.better-ig-controller
-  .progress-bar-horizontal
-  .baseline
-  .better-ig-progress-tooltip.visible {
-  opacity: 1;
+.better-ig-progress-tooltip.stories {
+  bottom: 0;
+  top: 20px;
+  z-index: 99999;
+  height: 18px;
 }
 
-.better-ig-controller .progress-bar-horizontal .baseline.dragging .fill {
-  transition: none;
+.better-ig-progress-tooltip.visible {
+  opacity: 1;
 }

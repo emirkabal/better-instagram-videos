@@ -1,13 +1,18 @@
 import { createRoot } from "react-dom/client"
 
 import Controller from "~components/Controller"
+import { IG_STORIES_VOLUME_INDICATOR } from "~utils/constants"
 
 export type Injected = [HTMLVideoElement, HTMLElement][]
 export type DownloadableMedia = {
   id: string
   index?: number
 }
-export type Variant = "default" | "reels" | "stories"
+export enum Variant {
+  Default = "default",
+  Reels = "reels",
+  Stories = "stories"
+}
 export interface InjectorOptions {
   improvePerformance?: boolean
   minRemoveCount?: number
@@ -24,7 +29,7 @@ export default class Injector {
   private improvePerformance = false
   private minRemoveCount = 4
   private removeCount = 3
-  private variant: Variant = "default"
+  variant: Variant = Variant.Default
 
   private injectedList: Injected = []
 
@@ -157,8 +162,15 @@ export default class Injector {
     const controller = document.createElement("div")
     controller.setAttribute("bigv-inject", "")
 
-    video.parentElement.style.setProperty("position", "relative")
-    video.parentElement.appendChild(controller)
+    if (this.variant === Variant.Stories) {
+      const element = document.querySelector(IG_STORIES_VOLUME_INDICATOR)
+        .parentElement.parentElement.parentElement
+      element.parentNode.insertBefore(controller, element)
+    } else {
+      video.parentElement.style.setProperty("position", "relative")
+      video.parentElement.appendChild(controller)
+    }
+
     video.currentTime = 0
     video.volume = 0
 

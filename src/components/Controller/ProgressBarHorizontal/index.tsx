@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react"
+
 import "./style.css"
+
+import cn from "classnames"
+
+import type { Variant } from "~modules/Injector"
 
 type Props = {
   progress?: number
@@ -7,6 +12,7 @@ type Props = {
   onProgress?: (progress: number) => void
   onDragging?: (dragging: boolean) => void
   videoDuration?: number
+  variant?: Variant
 }
 
 export default function ProgressBarHorizontal({
@@ -14,7 +20,8 @@ export default function ProgressBarHorizontal({
   chunksVal = 0,
   onProgress,
   onDragging,
-  videoDuration = 0
+  videoDuration = 0,
+  variant
 }: Props) {
   const [chunks, setChunks] = useState(chunksVal)
   const [progressBar, setProgressBar] = useState(progress)
@@ -23,17 +30,14 @@ export default function ProgressBarHorizontal({
   const [showTooltip, setShowTooltip] = useState(false)
   const dragareaRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState(0)
+  const animationFrameRef = useRef<number | null>(null)
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60)
     const remainingSeconds = (seconds % 60).toFixed(1)
-
-    if (minutes === 0) {
-      return `${remainingSeconds}s`
-    }
-    return `${minutes}:${Math.floor(Number(remainingSeconds))
-      .toString()
-      .padStart(2, "0")}`
+    return minutes === 0
+      ? `${remainingSeconds}s`
+      : `${minutes}:${Math.floor(Number(remainingSeconds)).toString().padStart(2, "0")}`
   }
 
   let lastX = 0
@@ -48,8 +52,9 @@ export default function ProgressBarHorizontal({
     const percent = Number((x / width).toFixed(4))
 
     if (percent >= 0 && percent <= 1) {
-      setProgressBar(Math.round(percent * 10000) / 100)
-      if (onProgress) onProgress(Math.round(percent * 10000) / 100)
+      const newProgress = Math.round(percent * 10000) / 100
+      setProgressBar(newProgress)
+      if (onProgress) onProgress(newProgress)
 
       const tooltipWidth = 60
       const maxPosition = width - tooltipWidth / 2
@@ -62,46 +67,56 @@ export default function ProgressBarHorizontal({
   }
 
   const updateProgressBar = () => {
+    if (isDragging) setProgressBar(progress)
     if (isNaN(progress) || isDragging) return
-    setProgressBar(progress)
+
+    const animateProgress = () => {
+      setProgressBar((currentProgress) => {
+        const diff = progress - currentProgress
+        if (Math.abs(diff) < 0.1) return progress
+        return currentProgress + diff * 0.1
+      })
+
+      animationFrameRef.current = requestAnimationFrame(animateProgress)
+    }
+
+    if (animationFrameRef.current)
+      cancelAnimationFrame(animationFrameRef.current)
+    animationFrameRef.current = requestAnimationFrame(animateProgress)
   }
 
   useEffect(() => {
     updateProgressBar()
+    return () => {
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current)
+    }
   }, [progress])
 
   useEffect(() => {
     window.addEventListener("mousemove", mouseMoveEvent)
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMoveEvent)
-    }
+    return () => window.removeEventListener("mousemove", mouseMoveEvent)
   }, [isDragging])
 
   const resizeEvent = () => {
     const rect = dragareaRef.current?.getBoundingClientRect()
     if (!rect) return
 
-    const width = rect.width
-    const percent = progressBar / 100
-    const x = width * percent
     setProgressBar(progressBar)
   }
 
   useEffect(() => {
     window.addEventListener("resize", resizeEvent)
-    return () => {
-      window.removeEventListener("resize", resizeEvent)
-    }
+    return () => window.removeEventListener("resize", resizeEvent)
   }, [progressBar])
 
   useEffect(() => {
-    window.addEventListener("mouseup", () => {
-      setDragging(false)
-    })
-    window.addEventListener("mouseleave", () => {
-      setDragging(false)
-    })
+    window.addEventListener("mouseup", () => setDragging(false))
+    window.addEventListener("mouseleave", () => setDragging(false))
+    return () => {
+      window.removeEventListener("mouseup", () => setDragging(false))
+      window.removeEventListener("mouseleave", () => setDragging(false))
+    }
   }, [])
 
   useEffect(() => {
@@ -135,30 +150,24 @@ export default function ProgressBarHorizontal({
             setDragging(true),
             mouseMoveEvent(e as any as MouseEvent, true)
           ]}
-        ></div>
+        />
         <div
-          className="fill"
+          className={cn("fill", {
+            "no-transition": isDragging
+          })}
           style={{
-            width: `${
-              progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar
-            }%`
+            transform: `scaleX(${(progressBar > 99.5 ? 100 : progressBar < 0.5 ? 0 : progressBar) / 100})`
           }}
-        ></div>
-        <div
-          className="chunks"
-          style={{
-            width: `${chunks}%`
-          }}
-        ></div>
+        />
+        <div className="chunks" style={{ width: `${chunks}%` }} />
         {(showTooltip || isDragging) && (
           <div
-            className={`better-ig-progress-tooltip ${
-              showTooltip || isDragging ? "visible" : ""
-            }`}
-            style={{
-              left: tooltipPosition
-            }}
-          >
+            className={cn(
+              "better-ig-progress-tooltip",
+              { visible: showTooltip || isDragging },
+              variant
+            )}
+            style={{ left: tooltipPosition }}>
             {formatTime(mousePosition * videoDuration)}
           </div>
         )}

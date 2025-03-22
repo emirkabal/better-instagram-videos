@@ -1,14 +1,19 @@
 import cn from "classnames"
+
 import "./style.css"
+
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useRef, useState } from "react"
+
+import type { Variant } from "~modules/Injector"
 
 type Props = {
   children: React.ReactNode
   dragging?: boolean
+  variant?: Variant
 }
 
-export default function SmartContainer({ children, dragging }: Props) {
+export default function SmartContainer({ children, dragging, variant }: Props) {
   const [active, setActive] = useState(false)
   const debounceRef = useRef<ReturnType<typeof debounce> | null>(null)
 
@@ -37,12 +42,15 @@ export default function SmartContainer({ children, dragging }: Props) {
 
   return (
     <div
-      className={cn("bgv-smart-container", {
-        active: dragging || active
-      })}
+      className={cn(
+        "bgv-smart-container",
+        {
+          active: dragging || active
+        },
+        variant
+      )}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={debouncedHandleMouseLeave}
-    >
+      onMouseLeave={debouncedHandleMouseLeave}>
       <div className="content">{children}</div>
     </div>
   )

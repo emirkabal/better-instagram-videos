@@ -10,6 +10,12 @@
   bottom: 0;
 }
 
+.better-ig-controller.stories {
+  top: 4px;
+  bottom: auto;
+  position: static;
+}
+
 .better-ig-controller img {
   border-radius: 4px;
 }

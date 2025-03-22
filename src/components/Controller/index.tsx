@@ -1,5 +1,6 @@
 import "./style.css"
 
+import cn from "classnames"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
 
@@ -19,16 +20,7 @@ type Props = {
   variant?: Variant
 }
 
-export default function Controller({
-  video,
-  downloadableMedia,
-  variant
-}: Props) {
-  const videoRef = useRef<HTMLVideoElement>(video)
-  const [progress, setProgress] = useState(0)
-  const [dragging, setDragging] = useState(false)
-  const [volumeDragging, setVolumeDragging] = useState(false)
-
+export function Volume({ variant }: { variant?: Variant }) {
   const [volume, setVolume] = useLocalStorage(
     "better-instagram-videos-volume",
     0.5
@@ -37,7 +29,41 @@ export default function Controller({
     "better-instagram-videos-muted",
     false
   )
+  const [volumeDragging, setVolumeDragging] = useState(false)
   const [maxVolumeBalance] = useStorage("bigv-max-volume-balance", 100)
+
+  return (
+    <SmartContainer dragging={volumeDragging} variant={variant}>
+      <VolumeButton muted={muted} onChange={(_) => setMuted(_)} />
+      <ProgressBarVertical
+        progress={volume * maxVolumeBalance}
+        onProgress={(_) => {
+          const ps = _ / maxVolumeBalance
+          setVolume(ps)
+        }}
+        onDragging={(_) => {
+          setVolumeDragging(_)
+          if (!_) setVolume(volume)
+        }}
+      />
+    </SmartContainer>
+  )
+}
+
+export default function Controller({
+  video,
+  downloadableMedia,
+  variant
+}: Props) {
+  const videoRef = useRef<HTMLVideoElement>(video)
+  const [progress, setProgress] = useState(0)
+  const [dragging, setDragging] = useState(false)
+
+  const [volume] = useLocalStorage("better-instagram-videos-volume", 0.5)
+  const [muted, setMuted] = useLocalStorage(
+    "better-instagram-videos-muted",
+    false
+  )
 
   // ig reels start
   // play, playing, seeking, waiting, volumechange, progress/timeupdate, seeked, canplay, playing, canplaythrough
@@ -103,26 +129,14 @@ export default function Controller({
 
   return (
     <>
-      <SmartContainer dragging={volumeDragging}>
-        <VolumeButton muted={muted} onChange={(_) => setMuted(_)} />
-        <ProgressBarVertical
-          progress={volume * maxVolumeBalance}
-          onProgress={(_) => {
-            const ps = _ / maxVolumeBalance
-            setVolume(ps)
-          }}
-          onDragging={(_) => {
-            setVolumeDragging(_)
-            if (!_) setVolume(volume)
-          }}
-        />
-      </SmartContainer>
+      {variant !== "stories" && <Volume />}
       {variant === "default" && downloadableMedia && (
         <DownloadButton data={downloadableMedia} label={false} inside />
       )}
-      <div className="better-ig-controller">
+      <div className={cn("better-ig-controller", variant)}>
         {video && (
           <ProgressBarHorizontal
+            variant={variant}
             progress={progress}
             videoDuration={videoRef.current.duration}
             onProgress={(progress) => {

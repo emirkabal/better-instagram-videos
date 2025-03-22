@@ -1,10 +1,10 @@
-import { Home, Reels } from "~modules/instagram"
+import { Home, Reels, Stories } from "~modules/instagram"
 
 const REGEX =
   /^(?:https?:\/\/(?:www\.)?instagram\.com)?(?:\/[\w.-]+)?\/(stories|reels|reel|tv|p)\/([\w.-]+)(?:\/([\w.-]+))?\/?$/i
 const home = new Home()
 const reels = new Reels()
-// const stories = new Stories()
+const stories = new Stories()
 
 let previousUrl = ""
 const load = () => {
@@ -17,20 +17,20 @@ const load = () => {
     first === "tv"
   ) {
     reels.delete()
-    // stories.delete()
+    stories.delete()
     home.wayToInject()
   } else if (first === "reels") {
     home.delete()
-    // stories.delete()
+    stories.delete()
     reels.wayToInject()
   } else if (first === "stories") {
     home.delete()
     reels.delete()
-    // stories.wayToInject()
+    stories.wayToInject()
   } else {
     home.delete()
     reels.delete()
-    // stories.delete()
+    stories.delete()
   }
 }
 

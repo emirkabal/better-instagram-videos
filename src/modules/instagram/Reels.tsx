@@ -3,8 +3,9 @@ import { createRoot } from "react-dom/client"
 import { Storage } from "@plasmohq/storage"
 
 import Buttons from "~components/Buttons"
+import { IG_REELS_VOLUME_INDICATOR } from "~utils/constants"
 
-import type { InjectedProps } from "../Injector"
+import { Variant, type InjectedProps } from "../Injector"
 import IntervalInjector, {
   type IntervalInjectorOptions
 } from "../IntervalInjector"
@@ -16,7 +17,7 @@ export default class Reels extends IntervalInjector {
   constructor(options?: IntervalInjectorOptions) {
     super({
       ...options,
-      variant: "reels"
+      variant: Variant.Reels
     })
 
     this.loadState()
@@ -34,13 +35,9 @@ export default class Reels extends IntervalInjector {
 
   public beforeInject(): void {
     // Remove the mute & unmute button
-    document
-      .querySelectorAll(
-        'div[aria-disabled="false"][role="button"] > div > div[tabindex="0"][role="button"] > svg'
-      )
-      .forEach((svg) => {
-        svg.parentElement?.remove()
-      })
+    document.querySelectorAll(IG_REELS_VOLUME_INDICATOR).forEach((svg) => {
+      svg.parentElement?.remove()
+    })
   }
 
   public beforeDelete(): void {
