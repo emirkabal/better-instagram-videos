@@ -12,12 +12,18 @@ Better Instagram Videos is a browser extension available on the Chrome Web Store
 - Autoskip support
 - Supports all videos on the Instagram
 
-<a href="https://chromewebstore.google.com/detail/ijgmchfimkocepiapjeoehcicfnhhchp" target="_">
-   <img src="https://github.com/user-attachments/assets/9eefa009-9fdb-4b59-979e-6aff439f9ef3" height=48 alt="Chrome Add-on Store Logo">
-</a>
-<a href="https://addons.mozilla.org/en-US/firefox/addon/better-instagram-videos" target="_">
-   <img src="https://github.com/user-attachments/assets/f1af1b1b-6a28-4038-8efe-da88bf2a9c6a" height=48 alt="Firefox Add-on Store Logo">
-</a>
+## Install
+
+[link-chrome]: https://chrome.google.com/webstore/detail/better-instagram-videos-p/ijgmchfimkocepiapjeoehcicfnhhchp 'Version published on Chrome Web Store'
+[link-firefox]: https://addons.mozilla.org/firefox/addon/better-instagram-videos/ 'Version published on Mozilla Add-ons'
+
+[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ijgmchfimkocepiapjeoehcicfnhhchp?label=%20">][link-chrome] and other Chromium browsers
+
+[<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/firefox/firefox.svg" width="48" alt="Firefox" valign="middle">][link-firefox] [<img valign="middle" src="https://img.shields.io/amo/v/better-instagram-videos.svg?label=%20">][link-firefox] and other Gecko-based browsers
+
+_If you like Better Instagram Videos, consider [sponsoring or hiring](https://github.com/sponsors/emirkabal) the maintainer [@emirkabal](https://twitter.com/emirkabal)_
+
+
 
 ## Usage
 
