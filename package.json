@@ -1,8 +1,8 @@
 {
-  "name": "better-instagram-videos",
-  "displayName": "Better instagram videos",
-  "version": "1.2.1",
-  "description": "Easily control the playback and volume of any Instagram videos.",
+  "name": "better-videos-for-instagram",
+  "displayName": "Better Videos for Instagram",
+  "version": "1.2.2",
+  "description": "Easily control the playback and volume of Instagram videos.",
   "author": "Emir Kabal <me@emirkabal.com>",
   "scripts": {
     "dev": "plasmo dev",

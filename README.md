@@ -1,8 +1,8 @@
-# Better Instagram Videos
+# Better Videos for Instagram
 
-<img align="right" src="/assets/icon.png" width=96 alt="Better Instagram Videos Logo">
+<img align="right" src="/assets/icon.png" width=96 alt="Better Videos for Instagram Logo">
 
-Better Instagram Videos is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
+Better Videos for Instagram is a browser extension available on the Chrome Web Store that enhances your Instagram experience by allowing easy video playback and volume adjustment.
 
 **Features:**
 
@@ -14,16 +14,14 @@ Better Instagram Videos is a browser extension available on the Chrome Web Store
 
 ## Install
 
-[link-chrome]: https://chrome.google.com/webstore/detail/better-instagram-videos-p/ijgmchfimkocepiapjeoehcicfnhhchp 'Version published on Chrome Web Store'
-[link-firefox]: https://addons.mozilla.org/firefox/addon/better-instagram-videos/ 'Version published on Mozilla Add-ons'
+[link-chrome]: https://chromewebstore.google.com/detail/ijgmchfimkocepiapjeoehcicfnhhchp "Version published on Chrome Web Store"
+[link-firefox]: https://addons.mozilla.org/firefox/addon/better-instagram-videos/ "Version published on Mozilla Add-ons"
 
 [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/chrome/chrome.svg" width="48" alt="Chrome" valign="middle">][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ijgmchfimkocepiapjeoehcicfnhhchp?label=%20">][link-chrome] and other Chromium browsers
 
 [<img src="https://raw.githubusercontent.com/alrra/browser-logos/90fdf03c/src/firefox/firefox.svg" width="48" alt="Firefox" valign="middle">][link-firefox] [<img valign="middle" src="https://img.shields.io/amo/v/better-instagram-videos.svg?label=%20">][link-firefox] and other Gecko-based browsers
 
 _If you like Better Instagram Videos, consider [sponsoring or hiring](https://github.com/sponsors/emirkabal) the maintainer [@emirkabal](https://twitter.com/emirkabal)_
-
-
 
 ## Usage
 
