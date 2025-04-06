@@ -23,7 +23,7 @@ export default function Popup() {
   return (
     <div className="better-ig-popup">
       <header>
-        <h1>Better Instagram Videos</h1>
+        <h1>Better Videos for Instagram</h1>
         <span className="version">v{version}</span>
       </header>
 
