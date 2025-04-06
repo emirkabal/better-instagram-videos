@@ -48,5 +48,3 @@ setInterval(() => {
 }, 100)
 
 document.addEventListener("DOMContentLoaded", load)
-
-export {}

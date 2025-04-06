@@ -7,6 +7,7 @@ export type Injected = [HTMLVideoElement, HTMLElement][]
 export type DownloadableMedia = {
   id: string
   index?: number
+  variant: Variant
 }
 export enum Variant {
   Default = "default",
@@ -179,7 +180,8 @@ export default class Injector {
     const index = params.get("img_index")
     const downloadableMedia: DownloadableMedia = {
       id: id ?? "",
-      index: index ? parseInt(index) : undefined
+      index: index ? parseInt(index) : undefined,
+      variant: this.variant
     }
 
     createRoot(controller).render(
